@@ -1,7 +1,14 @@
+import uuid
+from datetime import datetime
+from usuarios import registrar_compra_usuario
+
+def generar_id_unico():
+    return str(uuid.uuid4())
+
 def mostrar_destinos(destinos):
     print("=== Destinos disponibles ===")
     for codigo, datos in destinos.items():
-        print(f"{codigo}. {datos['nombre']} - ${datos['precio']} por persona")
+        print(f"{codigo}. {datos['ciudad']}, {datos['pais']} - ${datos['precio']} por persona")
     print()
 
 def mostrar_cuotas(cuotas):
@@ -10,7 +17,7 @@ def mostrar_cuotas(cuotas):
         print(f"{codigo}. {datos['nombre']} - Interés: {datos['interes']}%")
     print()
 
-def comprar_pasajes(destinos, cuotas):
+def comprar_pasajes(destinos, cuotas, usuario_logueado=None):
     while True:
         mostrar_destinos(destinos)
         destino_elegido = input("Elegí el número del destino: ")
@@ -18,7 +25,8 @@ def comprar_pasajes(destinos, cuotas):
             break
         print("❌ Opción de destino no válida. Ingrese un destino valido.\n")
 
-    nombre_destino = destinos[destino_elegido]["nombre"]
+    ciudad_destino = destinos[destino_elegido]["ciudad"]
+    pais_destino = destinos[destino_elegido]["pais"]
     precio_unitario = destinos[destino_elegido]["precio"]
 
     while True:
@@ -45,11 +53,28 @@ def comprar_pasajes(destinos, cuotas):
     total_con_interes = total_base * (1 + interes / 100)
     valor_por_cuota = total_con_interes / cantidad_cuotas
 
+    compra_id = generar_id_unico()
+    fecha_compra = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    estado = "Activo"
+
+    detalle_compra = {
+        "id": compra_id,
+        "fecha_compra": fecha_compra,
+        "estado": estado,
+        "destino": f"{ciudad_destino}, {pais_destino}",
+        "cantidad_pasajeros": cantidad,
+        "total": total_con_interes,
+        "cuotas": cuotas[cuotas_elegidas]['nombre'],
+        "valor_por_cuota": valor_por_cuota
+    }
+
     print("\n=== 🧾 Resumen de compra ===")
-    print(f"Destino: {nombre_destino}")
-    print(f"Cantidad de pasajeros: {cantidad}")
-    print(f"Total: ${total_con_interes:,.2f}")
-    print(f"Cuotas: {cuotas[cuotas_elegidas]['nombre']} de ${valor_por_cuota:,.2f} cada una\n")
+    print(f"ID de compra: {detalle_compra['id']}")
+    print(f"Fecha de compra: {detalle_compra['fecha_compra']}")
+    print(f"Destino: {detalle_compra['destino']}")
+    print(f"Cantidad de pasajeros: {detalle_compra['cantidad_pasajeros']}")
+    print(f"Total: ${detalle_compra['total']:,.2f}")
+    print(f"Cuotas: {detalle_compra['cuotas']} de ${detalle_compra['valor_por_cuota']:,.2f} cada una\n")
 
     while True:
         print("1. Confirmar compra")
@@ -57,6 +82,7 @@ def comprar_pasajes(destinos, cuotas):
         opcion = input("Elegí una opción: ")
         if opcion == "1":
             print("✅ ¡Compra confirmada! Gracias por viajar con nosotros.\n")
+            registrar_compra_usuario(usuario_logueado, detalle_compra)
             return
         elif opcion == "2":
             return
