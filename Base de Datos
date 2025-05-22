@@ -8,8 +8,8 @@ Atributos
 
 Campo	        Tipo	     Restricciones
 usuario_id	  INTEGER	   PRIMARY KEY, AUTOINCREMENT  (PK, entero, autoincremental)    
-email	        TEXT	     NOT NULL, UNIQUE            (texto, único, obligatorio)
-password	    TEXT	     NOT NULL                    (texto, obligatorio)
+email	       TEXT	      NOT NULL, UNIQUE            (texto, único, obligatorio)
+password	    TEXT	      NOT NULL                    (texto, obligatorio)
 
 Descripción: Representa a los usuarios registrados que pueden iniciar sesión y comprar pasajes
 
@@ -20,8 +20,8 @@ Atributos
 
 Campo	        Tipo	    Restricciones
 destino_id	  INTEGER	  PRIMARY KEY, AUTOINCREMENT  (PK, entero, autoincremental)
-nombre	      TEXT	    NOT NULL                    (texto, obligatorio)
-precio	      REAL	    NOT NULL                    (real, obligatorio)
+nombre	      TEXT	     NOT NULL                    (texto, obligatorio)
+precio	      REAL	     NOT NULL                    (real, obligatorio)
 
 Descripción: Contiene los destinos disponibles que el sistema ofrece para viajar.
 
@@ -31,8 +31,8 @@ Contiene las opciones de cuotas y sus intereses aplicables.
 Atributos
 
 Campo        	Tipo	      Restricciones
-cuota_id	    INTEGER	    PRIMARY KEY, AUTOINCREMENT (PK, entero, autoincremental)
-numero	      INTEGER	    NOT NULL, UNIQUE           (entero, obligatorio, único): representa el número de cuotas (1, 3, 6, 12)   
+cuota_id	     INTEGER	   PRIMARY KEY, AUTOINCREMENT (PK, entero, autoincremental)
+numero	       INTEGER	   NOT NULL, UNIQUE           (entero, obligatorio, único): representa el número de cuotas (1, 3, 6, 12)   
 interes	      REAL	      NOT NULL                   (real, obligatorio): porcentaje de interés asociado a las cuotas
 
 Descripción: Almacena las opciones de pago disponibles y sus tasas de interés.
@@ -44,12 +44,12 @@ Atributos
 
 Campo          	Tipo	      Restricciones
 compra_id	      INTEGER	    PRIMARY KEY, AUTOINCREMENT          (PK, entero, autoincremental)
-usuario_id	    INTEGER	    FOREIGN KEY → usuario(usuario_id)   (FK → Usuario.usuario_id)
-destino_id	    INTEGER	    FOREIGN KEY → destino(destino_id)   (FK → Destino.destino_id)
-cuota_id	      INTEGER	    FOREIGN KEY → cuota(cuota_id)       (FK → Cuota.cuota_id)
-cantidad	      INTEGER	    NOT NULL                            (entero, obligatorio): número de pasajes comprados
-fecha	          DATETIME	  DEFAULT CURRENT_TIMESTAMP           (datetime, valor por defecto = fecha actual)
-total	          REAL	      NOT NULL                            (real, obligatorio): total de la compra con intereses incluidos
+usuario_id	     INTEGER	    FOREIGN KEY → usuario(usuario_id)   (FK → Usuario.usuario_id)
+destino_id	     INTEGER	    FOREIGN KEY → destino(destino_id)   (FK → Destino.destino_id)
+cuota_id	       INTEGER	    FOREIGN KEY → cuota(cuota_id)       (FK → Cuota.cuota_id)
+cantidad	       INTEGER	    NOT NULL                            (entero, obligatorio): número de pasajes comprados
+fecha	          DATETIME	   DEFAULT CURRENT_TIMESTAMP           (datetime, valor por defecto = fecha actual)
+total	          REAL	       NOT NULL                            (real, obligatorio): total de la compra con intereses incluidos
 
 
 
