@@ -1,0 +1,34 @@
+﻿Informe sobre aspectos éticos y legales del desarrollo del sistema para SkyRoute S.R.L.
+Empresa: SkyRoute S.R.L.
+Proyecto: Desarrollo de una aplicación de consola en Python para gestión de ventas de pasajes aéreos, con funcionalidades básicas, incluyendo el botón de arrepentimiento.
+Equipo desarrollador: Grupo de 6 programadores contratados por SkyRoute S.R.L.
+
+
+1. Figura legal del grupo
+El equipo podrá adoptar la figura de una sociedad de hecho (según el art. 183 del Código Civil y Comercial), ya que actúa de forma conjunta con un objetivo común, aunque sin constituirse formalmente como sociedad. Alternativamente, cada integrante opera como monotributista, facturando sus servicios de forma individual. Los datos de los participantes son los siguientes:
+* 27-32240070-0  Natalia Dalmau
+* 20-25587780-5 Facundo Medrano
+* 20-35447841-2 Eneas Dias
+* 20-29874563-1 Ignacio Moyano
+* 20-23541236-7 Mauro Perez
+* 20-39235741-3 Maximiliano Alonso
+
+
+2. Relación laboral con SkyRoute S.R.L.
+La relación será de tipo contractual de prestación de servicios. No existe relación de dependencia ya que no hay subordinación ni exclusividad. Se configura un contrato entre partes independientes, conforme al artículo 1251 del Código Civil y Comercial, que regula la locación de obra o servicios.
+
+
+3. Cambio de proveedor
+Si la empresa decide cambiar de equipo, cada integrante debe cumplir con la ética profesional: entregar el código y documentación desarrollados, preservar la confidencialidad de la información (Ley 25.326 y principios de buena fe, art. 9 del CCCN) y abstenerse de bloquear el traspaso. El respeto por la empresa y por colegas que continúen el trabajo es clave.
+
+
+4. Propiedad de los datos
+Los datos almacenados son propiedad exclusiva de SkyRoute S.R.L., ya que son parte de su operación y fueron generados por su actividad. Así lo establece la Ley 25.326 de Protección de los Datos Personales, que indica que el responsable del tratamiento es quien define la finalidad y el uso de los datos.
+
+
+5. Propiedad del código desarrollado
+De acuerdo al contrato acordado. Se pacta como trabajo por encargo, los derechos patrimoniales sobre el software serán de SkyRoute S.R.L., conforme a la Ley 11.723 de Propiedad Intelectual (art. 17). Si no se especifica nada, los programadores conservan los derechos, aunque la empresa puede usar el código como cliente.
+
+
+6. Utilidad del botón de arrepentimiento
+El botón de arrepentimiento permite a los consumidores cancelar la compra de un pasaje aéreo hasta 60 días corridos después de la compra, siempre que no hayan utilizado el servicio. Esta obligación proviene de la Ley 24.240 de Defensa del Consumidor, artículo 34, y fue reglamentada específicamente por la Resolución 131/2021 para pasajes aéreos. Protege el derecho de los usuarios a arrepentirse de una decisión tomada por canales digitales, sin penalidades.
