@@ -1,0 +1,45 @@
+ 1. Entidades Principales del Sistema de Gestión de Pasajes
+Entidad		Descripción
+Usuario		Persona registrada que compra pasajes.
+Destino		Lugar al cual se puede viajar.
+Cuota		Opción de financiamiento del pasaje con interés.
+Pasaje		Representa la compra de uno o más boletos por un usuario.
+________________________________________
+ 2. Atributos por Entidad y Tipos de Datos
+ Usuario
+Atributo	Tipo de dato	Clave
+email		text		PK
+password	text		—
+________________________________________
+ Destino
+Atributo	Tipo de dato	Clave
+id_destino	int		PK
+ciudad	text			—
+pais	text			—
+precio	decimal			—
+________________________________________
+ Cuota
+Atributo	Tipo de dato	Clave
+id_cuota	int		PK
+nombre		text		—
+interes		int		—
+________________________________________
+ Pasaje
+Atributo		Tipo de dato	Clave	Descripción
+id_pasaje		UUID		PK	Identificador único del pasaje
+fecha_compra		date/time	—	Fecha en la que se realizó la compra
+estado			text		—	Estado del pasaje (ej: pagado)
+cantidad_pasajeros	int		—	Número de personas en el pasaje
+total			decimal		—	Costo total del pasaje
+valor_cuota		decimal		—	Monto por cuota
+id_usuario		text		FK	Referencia a Usuario (email)
+id_destino		int		FK	Referencia a Destino
+id_cuota		int		FK	Referencia a Cuota
+________________________________________
+ Relaciones y Cardinalidades
+Relación		Cardinalidad	Clave Foránea	Tipo de dependencia
+Usuario - Pasaje	1:N		id_usuario	Identidad
+Destino - Pasaje	1:N		id_destino	Identidad
+Cuota - Pasaje	1:N	id_cuota	Identidad
+Destino - Cuota	1:N	— (implícita)	No identidad
+ Todas las relaciones están modeladas correctamente como relaciones de uno a muchos, lo cual tiene sentido en un sistema de gestión de pasajes.
