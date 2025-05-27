@@ -1,6 +1,9 @@
 # ✈️ Agencia de Viajes SkyRoute - Aplicación en Consola
 
 Este proyecto es una aplicación interactiva de consola que simula una agencia de viajes. Permite a los usuarios registrarse, iniciar sesión, ver destinos disponibles y comprar pasajes en cuotas.
+En la Carpeta Proyectos se encuentra lo solicitado para la meteria Introducción a la Programación.
+En la Base de Datos se encuentra lo solicitado para la meteria Base de Datos.
+En la Carpeta Ética se encuentra lo solicitado para la meteria Ética y deontología.
 
 ## 👥 Integrantes
 
