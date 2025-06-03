@@ -99,7 +99,6 @@ def anular_venta(conn, venta_id):
         return
     cursor = conn.cursor()
     try:
-        # Primero, verificar si la venta existe y su estado actual
         cursor.execute("SELECT estado FROM ventas WHERE id = %s", (venta_id,))
         venta_actual = cursor.fetchone()
 
@@ -112,7 +111,6 @@ def anular_venta(conn, venta_id):
             print(f"La venta con ID {venta_id} ya está anulada.")
             return
 
-        # Si existe y no está anulada, proceder a anularla
         cursor.execute("""
             UPDATE ventas SET estado = 'Anulada' WHERE id = %s
         """, (venta_id,))
