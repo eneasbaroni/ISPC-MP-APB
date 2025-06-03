@@ -3,107 +3,211 @@ SkyRoute - Agencia de Viajes
 Este programa permite a los usuarios registrarse, iniciar sesión, ver destinos disponibles y comprar pasajes.
 Para ver los pasos de instalacion y uso, consulta el archivo README.md.
 """
+import config
+import dbConnection
+import gestionClientes
+import gestionDestinos
+import gestionVentas
+import datetime # Importamos datetime para manejar las fechas en ventas
 
+# --- Funciones de Menú ---
 
-from destinos import destinos
-from menu import menu
-from cuotas import cuotas
-from usuarios import crear_usuario, loguearse, usuarios, ver_pasajes, anular_pasaje_usuario
-from viajes import mostrar_destinos, comprar_pasajes
-
-
-usuario_logueado = None
-
-def mostrar_menu_principal(menu):
-    print("=== Menú Principal ===")
-    for opcion, datos in menu.items():
-        print(f"{opcion}. {datos['nombre']}")
-    print("0. Salir")
-
-def volver_o_salir():
+def menu_gestion_clientes(conn):
     while True:
-        print("1. Volver al menú principal")
-        print("0. Salir")
-        opcion = input("Elegí una opción: ")
-        if opcion == "1":
-            return True  # Volver al menú
-        elif opcion == "0":
-            print("¡Hasta luego!")
-            return False  # Salir del programa
-        else:
-            print("Opción no válida. Intentá de nuevo.\n")
+        print("\n--- Gestión de Clientes ---")
+        print("1. Ver todos los clientes")
+        print("2. Ver un cliente específico")
+        print("3. Crear nuevo cliente")
+        print("4. Editar cliente existente")
+        print("5. Eliminar cliente")
+        print("0. Volver al menú principal")
 
-def menu_ver_pasajes():
-    while True:
-        print("\n=== Opciones de Pasajes ===")
-        print("1. Volver al menú principal")
-        print("2. Salir")
-        print("3. Arrepentimiento de compra")
-        opcion = input("Elegí una opción: ")
-        return opcion
+        opcion = input("Seleccione una opción: ")
 
-def navegar_menu(menu):
-    global usuario_logueado
-    print("Bienvenido a la agencia de viajes SkyRoute 🛩️")
-    while True:
-        mostrar_menu_principal(menu)
-        eleccion = input("Elegí una opción: ")
+        if opcion == '1':
+            gestionClientes.listar_clientes(conn)
+        elif opcion == '2':
+            try:
+                cliente_id = int(input("Ingrese el ID del cliente a ver: "))
+                gestionClientes.ver_cliente(conn, cliente_id)
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '3':
+            razon_social = input("Ingrese la razón social: ")
+            cuit = input("Ingrese el CUIT: ")
+            email = input("Ingrese el email: ")
+            gestionClientes.insertar_cliente(conn, razon_social, cuit, email)
+        elif opcion == '4':
+            try:
+                cliente_id = int(input("Ingrese el ID del cliente a editar: "))
+                razon_social = input("Nueva razón social (dejar vacío para no cambiar): ")
+                cuit = input("Nuevo CUIT (dejar vacío para no cambiar): ")
+                email = input("Nuevo email (dejar vacío para no cambiar): ")
 
-        if eleccion == "0":
-            print("¡Hasta luego!")
+                exito_edicion = gestionClientes.editar_cliente(conn, cliente_id,
+                                                            razon_social if razon_social else None,
+                                                            cuit if cuit else None,
+                                                            email if email else None)
+
+                if exito_edicion:
+                    print(f"Operación de edición para el cliente ID {cliente_id} completada.")
+                else:
+                    pass 
+
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '5':
+            try:
+                cliente_id = int(input("Ingrese el ID del cliente a eliminar: "))
+                gestionClientes.eliminar_cliente(conn, cliente_id)
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '0':
             break
+        else:
+            print("Opción no válida. Intente de nuevo.")
 
-        if eleccion in menu:
-            submenu = menu[eleccion]["submenu"]
-            print(f"--- {menu[eleccion]['nombre']} ---")
-            for subopcion, texto in submenu.items():
-                print(f"{subopcion}. {texto}")
+def menu_gestion_destinos(conn):
+    while True:
+        print("\n--- Gestión de Destinos ---")
+        print("1. Ver todos los destinos")
+        print("2. Ver un destino específico")
+        print("3. Crear nuevo destino")
+        print("4. Editar destino existente")
+        print("5. Eliminar destino")
+        print("0. Volver al menú principal")
 
-            subeleccion = input("Elegí una opción del submenú: ")
+        opcion = input("Seleccione una opción: ")
 
-            if eleccion == "1" and subeleccion == "1":
-                crear_usuario(usuarios)
-            elif eleccion == "1" and subeleccion == "2":
-                usuario = loguearse(usuarios)
-                if usuario:
-                    usuario_logueado = usuario['email']
-            elif eleccion == "1" and subeleccion == "4":
-                if usuario_logueado:
-                    pasajes_vistos = ver_pasajes(usuario_logueado, mostrar_opciones=False)
-                    if pasajes_vistos:
-                        opcion_pasajes = menu_ver_pasajes()
-                        if opcion_pasajes == "1":
-                            continue # Volver al menú principal
-                        elif opcion_pasajes == "2":
-                            break # Salir del programa
-                        elif opcion_pasajes == "3":
-                            anular_pasaje_usuario(usuario_logueado, pasajes_vistos)
+        if opcion == '1':
+            gestionDestinos.listar_destinos(conn)
+        elif opcion == '2':
+            try:
+                destino_id = int(input("Ingrese el ID del destino a ver: "))
+                gestionDestinos.ver_destino(conn, destino_id)
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '3':
+            ciudad = input("Ingrese la ciudad: ")
+            pais = input("Ingrese el país: ")
+            try:
+                costo_base = float(input("Ingrese el costo base: "))
+                gestionDestinos.insertar_destino(conn, ciudad, pais, costo_base)
+            except ValueError:
+                print("Costo base inválido. Por favor, ingrese un número.")
+        elif opcion == '4':
+            try:
+                destino_id = int(input("Ingrese el ID del destino a editar: "))
+                ciudad = input("Nueva ciudad (dejar vacío para no cambiar): ")
+                pais = input("Nuevo país (dejar vacío para no cambiar): ")
+                costo_base_str = input("Nuevo costo base (dejar vacío para no cambiar): ")
+
+                costo_base = float(costo_base_str) if costo_base_str else None
+
+                exito_edicion = gestionDestinos.editar_destino(conn, destino_id,
+                                                            ciudad if ciudad else None,
+                                                            pais if pais else None,
+                                                            costo_base)
+
+                if exito_edicion:
+                    print(f"Operación de edición para el destino ID {destino_id} completada.")
                 else:
-                    print("\n⚠️ Debes iniciar sesión para ver tus pasajes.\n")
-                    if volver_o_salir():
-                        continue # Volver al menú principal
-                    else:
-                        break # Salir del programa
-            elif eleccion == "1" and subeleccion == "5":
-                if usuario_logueado:
-                    usuario_logueado = None
-                    print("\n✅ Sesión cerrada.\n")
-                else:
-                    print("\n⚠️ No hay sesión activa para cerrar.\n")
-            elif eleccion == "2" and subeleccion == "1":
-                mostrar_destinos(destinos)
-                if not volver_o_salir(): 
-                    break
-            elif eleccion == "2" and subeleccion == "2":
-                if usuario_logueado is None:
-                    print("\n⚠️ Debes iniciar sesión para comprar pasajes. \n")
-                    if volver_o_salir():
-                        continue # Volver al menú principal
-                    else:
-                        break # Salir del programa
-                else:
-                    comprar_pasajes(destinos, cuotas, usuario_logueado)
-            else:
-                print("\nFuncionalidad aún no implementada.\n")
+                    pass
 
-navegar_menu(menu)
+            except ValueError:
+                print("ID o costo base inválido. Por favor, ingrese un número.")
+        elif opcion == '5': 
+            try:
+                destino_id = int(input("Ingrese el ID del destino a eliminar: "))
+                gestionDestinos.eliminar_destino(conn, destino_id)
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '0':
+            break
+        else:
+            print("Opción no válida. Intente de nuevo.")
+
+def menu_gestion_ventas(conn):
+    while True:
+        print("\n--- Gestión de Ventas ---")
+        print("1. Ver todas las ventas")
+        print("2. Ver una venta específica")
+        print("3. Crear nueva venta")
+        print("4. Anular venta")
+        print("0. Volver al menú principal")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == '1':
+            gestionVentas.listar_ventas(conn)
+        elif opcion == '2':
+            try:
+                venta_id = int(input("Ingrese el ID de la venta a ver: "))
+                gestionVentas.ver_venta(conn, venta_id)
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '3':
+            try:
+                cliente_id = int(input("Ingrese el ID del cliente para la venta: "))
+                destino_id = int(input("Ingrese el ID del destino para la venta: "))
+                fecha_str = input("Ingrese la fecha de la venta (YYYY-MM-DD): ")
+                monto = float(input("Ingrese el monto de la venta: "))
+                
+
+                try:
+                    fecha = datetime.datetime.strptime(fecha_str, '%Y-%m-%d').date()
+                except ValueError:
+                    print("Formato de fecha incorrecto. Use YYYY-MM-DD.")
+                    continue 
+                
+                gestionVentas.insertar_venta(conn, cliente_id, destino_id, fecha, monto)
+            except ValueError:
+                print("Entrada inválida. Asegúrese de ingresar números para IDs y monto.")
+        elif opcion == '4': 
+            try:
+                venta_id = int(input("Ingrese el ID de la venta a anular: "))
+                gestionVentas.anular_venta(conn, venta_id)
+            except ValueError:
+                print("ID inválido. Por favor, ingrese un número.")
+        elif opcion == '0':
+            break
+        else:
+            print("Opción no válida. Intente de nuevo.")
+
+# --- Función Principal de la Aplicación ---
+
+def main():
+    conn = dbConnection.conectar_db()
+    if conn is None:
+        print("No se pudo establecer conexión con la base de datos. Saliendo del programa.")
+        return
+
+    gestionClientes.crear_tabla_clientes(conn)
+    gestionDestinos.crear_tabla_destinos(conn)
+    gestionVentas.crear_tabla_ventas(conn)
+
+    while True:
+        print("\n=== MENÚ PRINCIPAL ===")
+        print("1. Gestión de Clientes")
+        print("2. Gestión de Destinos")
+        print("3. Gestión de Ventas")
+        print("0. Salir")
+
+        opcion_principal = input("Seleccione una opción: ")
+
+        if opcion_principal == '1':
+            menu_gestion_clientes(conn)
+        elif opcion_principal == '2':
+            menu_gestion_destinos(conn)
+        elif opcion_principal == '3':
+            menu_gestion_ventas(conn)
+        elif opcion_principal == '0':
+            print("Saliendo de la aplicación. ¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida. Intente de nuevo.")
+    
+    dbConnection.cerrar_conexion(conn)
+
+if __name__ == "__main__":
+    main()
