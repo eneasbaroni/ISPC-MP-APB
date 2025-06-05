@@ -104,7 +104,7 @@ A continuación, se describen los pasos para utilizar las funcionalidades implem
 
 1.  **Gestión de Clientes:**
 
-    -   Este menú permite administrar la información de los clientes:
+-   Este menú permite administrar la información de los clientes:
 
 ```bash
 === MENÚ PRINCIPAL ===
@@ -114,13 +114,13 @@ A continuación, se describen los pasos para utilizar las funcionalidades implem
 0. Salir
 ```
 
-    -    Crear nuevo cliente: Se solicitará la Razón Social, CUIT y Email. Ambos CUIT y Email deben ser únicos.
-    -    Editar cliente existente:  Se solicitará el ID del cliente y luego se podrá dejar en blanco los campos que no deseas modificar.
-    -    Eliminar cliente:  Se solicitará el ID del cliente. Un cliente no puede ser eliminado si tiene ventas asociadas. Se Deberán anular o eliminar las ventas relacionadas primero.
+-   Crear nuevo cliente: Se solicitará la Razón Social, CUIT y Email. Ambos CUIT y Email deben ser únicos.
+-   Editar cliente existente: Se solicitará el ID del cliente y luego se podrá dejar en blanco los campos que no deseas modificar.
+-   Eliminar cliente: Se solicitará el ID del cliente. Un cliente no puede ser eliminado si tiene ventas asociadas. Se Deberán anular o eliminar las ventas relacionadas primero.
 
 2.  **Gestión de Destinos:**
 
-    -   Este menú te permite administrar los destinos de viaje disponibles:
+-   Este menú te permite administrar los destinos de viaje disponibles:
 
 ```bash
 --- Gestión de Destinos ---
@@ -132,15 +132,15 @@ A continuación, se describen los pasos para utilizar las funcionalidades implem
 0. Volver al menú principal
 ```
 
-    -   Ver todos los destinos: Mostrará el listado de destinos disponibles en la BD.
-    -   Ver un destino específico: Mostrara la informacion de un destino en particular segun el id ingresado.
-    -   Crear nuevo destino: Se pedirá Ciudad, País y Costo Base.
-    -   Editar destino existente: Se pedirá el ID del destino y luego se podrá dejar en blanco los campos que no deseas modificar. El Costo Base puede ser un número decimal.
-    -   Eliminar destino: Se pedirá el ID del destino. Un destino no puede ser eliminado si tiene ventas asociadas. Se Deberásdeberá anular o eliminar las ventas relacionadas primero.
+-   Ver todos los destinos: Mostrará el listado de destinos disponibles en la BD.
+-   Ver un destino específico: Mostrara la informacion de un destino en particular segun el id ingresado.
+-   Crear nuevo destino: Se pedirá Ciudad, País y Costo Base.
+-   Editar destino existente: Se pedirá el ID del destino y luego se podrá dejar en blanco los campos que no deseas modificar. El Costo Base puede ser un número decimal.
+-   Eliminar destino: Se pedirá el ID del destino. Un destino no puede ser eliminado si tiene ventas asociadas. Se Deberásdeberá anular o eliminar las ventas relacionadas primero.
 
 3.  **Gestión de Ventas:**
 
-    -   Este menú permite gestionar las ventas de pasajes:
+-   Este menú permite gestionar las ventas de pasajes:
 
 ```bash
 --- Gestión de Ventas ---
@@ -151,13 +151,13 @@ A continuación, se describen los pasos para utilizar las funcionalidades implem
 0. Volver al menú principal
 ```
 
-    -   Ver todos las ventas: Mostrará el listado de ventas disponibles en la BD.
-    -   Ver una venta específica: Mostrara la informacion de una venta en particular segun el id ingresado.
-    -   Crear nueva venta:
-        -   Se pedirá el ID del cliente y el ID del destino, es necesario que existan en la base de datos.
-        -   La fecha y hora de la venta se registran automáticamente al momento de la creación.
-        -   Se Deberá ingresar el monto de la venta.
-    -   Anular venta:
-        -   Se pedirá el ID de la venta a anular.
-        -   Importante: Solo se puede anular una venta si no han transcurrido más de 2 minutos desde su registro. Si se excede este tiempo, la anulación será denegada.
-        -   Si la venta ya está anulada, se informará.
+-   Ver todos las ventas: Mostrará el listado de ventas disponibles en la BD.
+-   Ver una venta específica: Mostrara la informacion de una venta en particular segun el id ingresado.
+-   Crear nueva venta:
+    -   Se pedirá el ID del cliente y el ID del destino, es necesario que existan en la base de datos.
+    -   La fecha y hora de la venta se registran automáticamente al momento de la creación.
+    -   Se Deberá ingresar el monto de la venta.
+-   Anular venta:
+    -   Se pedirá el ID de la venta a anular.
+    -   Importante: Solo se puede anular una venta si no han transcurrido más de 2 minutos desde su registro. Si se excede este tiempo, la anulación será denegada.
+    -   Si la venta ya está anulada, se informará.
