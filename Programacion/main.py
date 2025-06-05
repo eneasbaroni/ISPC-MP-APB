@@ -150,17 +150,11 @@ def menu_gestion_ventas(conn):
             try:
                 cliente_id = int(input("Ingrese el ID del cliente para la venta: "))
                 destino_id = int(input("Ingrese el ID del destino para la venta: "))
-                fecha_str = input("Ingrese la fecha de la venta (YYYY-MM-DD): ")
+                fecha = datetime.datetime.now()
                 monto = float(input("Ingrese el monto de la venta: "))
-                
 
-                try:
-                    fecha = datetime.datetime.strptime(fecha_str, '%Y-%m-%d').date()
-                except ValueError:
-                    print("Formato de fecha incorrecto. Use YYYY-MM-DD.")
-                    continue 
-                
                 gestionVentas.insertar_venta(conn, cliente_id, destino_id, fecha, monto)
+                
             except ValueError:
                 print("Entrada inválida. Asegúrese de ingresar números para IDs y monto.")
         elif opcion == '4': 
@@ -177,7 +171,7 @@ def menu_gestion_ventas(conn):
 # --- Función Principal de la Aplicación ---
 
 def main():
-    conn = dbConnection.conectar_db()
+    conn = dbConnection.conectar_db('prog_apb')
     if conn is None:
         print("No se pudo establecer conexión con la base de datos. Saliendo del programa.")
         return

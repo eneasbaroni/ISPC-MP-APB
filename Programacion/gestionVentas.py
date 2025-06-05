@@ -1,4 +1,5 @@
 from mysql.connector import Error
+import datetime
 
 def crear_tabla_ventas(conn):
     if conn is None or not conn.is_connected():
@@ -11,7 +12,7 @@ def crear_tabla_ventas(conn):
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 cliente_id INT NOT NULL,
                 destino_id INT NOT NULL,
-                fecha DATE NOT NULL,
+                fecha DATETIME NOT NULL,
                 monto DECIMAL(10, 2) NOT NULL,
                 estado VARCHAR(50) DEFAULT 'Activa',
                 FOREIGN KEY (cliente_id) REFERENCES clientes(id),
@@ -64,7 +65,8 @@ def listar_ventas(conn):
             print("No hay ventas registradas en la base de datos.")
         else:
             for venta in ventas:
-                print(f"ID: {venta[0]}, Cliente: {venta[1]}, Destino: {venta[2]}, País: {venta[3]}, Fecha: {venta[4]}, Monto: ${venta[5]}, Estado: {venta[6]}")
+                fecha_formateada = venta[4].strftime('%Y-%m-%d %H:%M:%S') if venta[4] else "N/A"
+                print(f"ID: {venta[0]}, Cliente: {venta[1]}, Destino: {venta[2]}, País: {venta[3]}, Fecha: {fecha_formateada}, Monto: ${venta[5]}, Estado: {venta[6]}")
     except Error as e:
         print(f"Error al listar las ventas: {e}")
     finally:
@@ -85,7 +87,8 @@ def ver_venta(conn, venta_id):
         """, (venta_id,))
         venta = cursor.fetchone()
         if venta:
-            print(f"ID: {venta[0]}, Cliente: {venta[1]}, Destino: {venta[2]}, País: {venta[3]}, Fecha: {venta[4]}, Monto: ${venta[5]}, Estado: {venta[6]}")
+            fecha_formateada = venta[4].strftime('%Y-%m-%d %H:%M:%S') if venta[4] else "N/A"
+            print(f"ID: {venta[0]}, Cliente: {venta[1]}, Destino: {venta[2]}, País: {venta[3]}, Fecha: {fecha_formateada}, Monto: ${venta[5]}, Estado: {venta[6]}")
         else:
             print(f"No se encontró la venta con ID {venta_id}.")
     except Error as e:
@@ -99,7 +102,7 @@ def anular_venta(conn, venta_id):
         return
     cursor = conn.cursor()
     try:
-        cursor.execute("SELECT estado FROM ventas WHERE id = %s", (venta_id,))
+        cursor.execute("SELECT estado, fecha FROM ventas WHERE id = %s", (venta_id,))
         venta_actual = cursor.fetchone()
 
         if venta_actual is None:
@@ -107,18 +110,29 @@ def anular_venta(conn, venta_id):
             return
         
         current_status = venta_actual[0]
+        fecha_venta = venta_actual[1]
+
         if current_status == 'Anulada':
             print(f"La venta con ID {venta_id} ya está anulada.")
             return
 
-        cursor.execute("""
-            UPDATE ventas SET estado = 'Anulada' WHERE id = %s
-        """, (venta_id,))
-        conn.commit()
-        if cursor.rowcount > 0:
-            print(f"Venta con ID {venta_id} anulada correctamente.")
+        tiempo_actual = datetime.datetime.now()
+        diferencia_tiempo = tiempo_actual - fecha_venta
+        
+        limite_arrepentimiento = datetime.timedelta(minutes=2)
+
+        if diferencia_tiempo <= limite_arrepentimiento:
+            cursor.execute("""
+                UPDATE ventas SET estado = 'Anulada' WHERE id = %s
+            """, (venta_id,))
+            conn.commit()
+            if cursor.rowcount > 0:
+                print(f"Venta con ID {venta_id} anulada correctamente.")
+            else:
+                print(f"No se pudo anular la venta con ID {venta_id}. Posiblemente no existía o ya estaba anulada.")
         else:
-            print(f"No se pudo anular la venta con ID {venta_id}. Posiblemente no existía o ya estaba anulada.")
+            print(f"Han pasado más de 60 días desde la venta (ID: {venta_id}). No se puede anular.")
+
     except Error as e:
         print(f"Error al anular la venta: {e}")
     finally:
