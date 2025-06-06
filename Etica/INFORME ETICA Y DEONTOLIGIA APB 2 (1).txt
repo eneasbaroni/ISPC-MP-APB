@@ -31,4 +31,47 @@ De acuerdo al contrato acordado. Se pacta como trabajo por encargo, los derechos
 
 
 6. Utilidad del botón de arrepentimiento
-El botón de arrepentimiento permite a los consumidores cancelar la compra de un pasaje aéreo hasta 60 días corridos después de la compra, siempre que no hayan utilizado el servicio. Esta obligación proviene de la Ley 24.240 de Defensa del Consumidor, artículo 34, y fue reglamentada específicamente por la Resolución 131/2021 para pasajes aéreos. Protege el derecho de los usuarios a arrepentirse de una decisión tomada por canales digitales, sin penalidades.
+El botón de arrepentimiento permite a los consumidores cancelar la compra de un pasaje aéreo hasta 60 días corridos después de la compra, siempre que no hayan utilizado el servicio. Esta obligación proviene de la Ley 24.240 de Defensa del Consumidor, artículo 34, y fue reglamentada específicamente por la Resolución 131/2021 para pasajes aéreos. Protege el derecho de los usuarios a arrepentirse de una decisión tomada por canales digitales, sin penalidades. Para efectos prácticos en el prototipo, se simula con una ventana de 2 minutos.
+
+7. Implementación Ley 11.723 – Propiedad Intelectual
+Se incluirán en los archivos del código avisos como el siguiente:
+# Código desarrollado por el Equipo SkyRoute – 2025
+# Proyecto entregado bajo cesión de derechos patrimoniales a SkyRoute S.R.L.
+Esto deja constancia de la autoría, y, si así se pactó, de la cesión de los derechos de explotación a la empresa.
+
+8. Implementación Ley 25.326 – Protección de Datos
+En la base de datos se implementan las siguientes buenas prácticas:
+
+-Almacenamiento mínimo de datos (solo los necesarios).
+-Consentimiento informado al registrar al cliente.
+-Posibilidad de rectificación/borrado a pedido del titular.
+-Acceso restringido al archivo .db.
+-Encriptación de campos sensibles (correo, teléfono).
+
+9. Aplicación del Convenio de Budapest (Ciberdelito)
+Si un cliente argentino denuncia un incidente de seguridad en la sucursal de España, puede invocarse el Convenio de Budapest sobre Ciberdelito, ratificado por ambos países.
+Este acuerdo facilita la cooperación internacional para investigar delitos informáticos como acceso indebido, sabotaje de datos, suplantación de identidad o interceptación de comunicaciones.
+La aplicación deberá contar con:
+
+*Registro de actividad (logs).
+*Mecanismos de autenticación.
+*Respuesta técnica rápida ante incidentes.
+
+10. Inteligencia Artificial (IA) – Marco Legal y Buenas Prácticas
+Si se incorporara IA, se deben considerar:
+
+-Marco legal argentino futuro: Ante la falta de ley específica, se aplican la Ley de Datos Personales, la Constitución Nacional y el principio de no discriminación.
+
+Buenas prácticas éticas:
+
+*Transparencia algorítmica (informar al usuario).
+*No recopilar datos sin consentimiento.
+*Permitir rechazar el perfilado.
+*Evitar sesgos en los datos de entrenamiento.
+
+Conclusiones grupales vinculadas al caso:
+Como desarrolladores, asumimos una doble responsabilidad técnica y ética. No solo debemos entregar un sistema funcional, sino que este debe estar alineado con las normas vigentes y el respeto al usuario.
+A través del botón de arrepentimiento, la protección de datos y la claridad en la relación contractual, se materializan derechos fundamentales del consumidor en el entorno digital.
+Es clave mantener la confidencialidad, la transparencia y la colaboración interdisciplinaria, especialmente si en el futuro el sistema se expande o incorpora IA.
+La ética profesional no se limita al momento del desarrollo, sino que se extiende a todo el ciclo de vida del software
+
