@@ -171,7 +171,7 @@ def menu_gestion_ventas(conn):
 # --- Función Principal de la Aplicación ---
 
 def main():
-    conn = dbConnection.conectar_db('prog_apb')
+    conn = dbConnection.conectar_db(config.DB_CONFIG['database'],)
     if conn is None:
         print("No se pudo establecer conexión con la base de datos. Saliendo del programa.")
         return
