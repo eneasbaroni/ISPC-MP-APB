@@ -1,37 +1,46 @@
-# Proyecto SkyRoute - Base de Datos SQL
+Proyecto SkyRoute - Base de Datos SQL
+Descripción
+Este proyecto contiene el script SQL para la creación y gestión de la base de datos prog_apb, diseñada para la agencia de viajes SkyRoute. Incluye las tablas clientes, destinos y ventas, además de ejemplos de consultas útiles para explorar y analizar la información registrada.
 
-## Descripción
+Instrucciones
+Por favor, consultá el archivo PDF incluido para seguir paso a paso la creación de la base de datos, inserción de datos de prueba y ejecución de consultas SQL.
+El documento explica conceptos clave como claves primarias y foráneas, y ofrece ejemplos prácticos comentados.
 
-Este proyecto contiene el script SQL para la creación y gestión de la base de datos **SkyRoute**, que incluye tablas para clientes, destinos y ventas, además de consultas útiles para analizar los datos.
+Archivos incluidos
+prog_apb.sql — Script completo para crear la base de datos, insertar datos de prueba y ejecutar consultas.
 
----
+SQL SkyRoute Creación de BD.pdf — Guía explicativa paso a paso con introducción, estructura y ejemplos comentados.
 
-## Instrucciones
+Estructura del proyecto
+Tablas incluidas:
+clientes: Información de los clientes (razón social, CUIT, email).
 
-Por favor, **lee y sigue cuidadosamente las instrucciones del archivo PDF adjunto**, donde se explica paso a paso cómo ejecutar el script, cargar datos y realizar consultas.
+destinos: Ciudades disponibles para viajar, país y costo base del pasaje.
 
-El PDF contiene detalles importantes para entender la estructura de la base de datos, cómo usar las consultas y cómo validar que todo funcione correctamente.
+ventas: Registro de ventas con fechas, montos, estado y relaciones con clientes y destinos.
 
----
+Consultas de ejemplo:
+Listar todos los clientes.
 
-## Archivos incluidos
+Ventas realizadas en una fecha específica.
 
-- `prog_abp.sql` — Script completo para crear la base de datos y realizar operaciones.
-- `Configuración de la Base de Datos.pdf` — Documento con explicación y guía detallada.
+Última venta por cliente.
 
----
+Destinos cuya ciudad comienza con “S”.
 
-## Requisitos previos
+Cantidad de ventas por país.
 
-- Tener instalado un sistema gestor de bases de datos MySQL o MariaDB.
-- Conocer cómo ejecutar scripts SQL en consola o mediante alguna interfaz gráfica como MySQL Workbench.
+Total recaudado por cliente (solo ventas activas).
 
----
+Requisitos
+Tener instalado un sistema de gestión de bases de datos compatible con SQL (como MySQL o MariaDB).
 
-## Contacto
+Capacidad para ejecutar scripts SQL desde terminal o interfaz gráfica (ej. MySQL Workbench).
 
-Si tenés alguna duda o inconveniente, podés contactarme para ayudarte a resolverlo.
+Conocimientos básicos de SQL.
 
----
 
-¡Gracias por usar SkyRoute!
+Contacto
+Si tenés dudas o problemas con la implementación del sistema, no dudes en contactarme para ayudarte.
+
+¡Gracias por usar SkyRoute y ser parte del viaje!
