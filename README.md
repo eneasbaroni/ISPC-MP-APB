@@ -4,6 +4,7 @@ Este proyecto es una aplicación interactiva de consola que simula una herramien
 En la Carpeta Proyectos se encuentra lo solicitado para la meteria Introducción a la Programación.
 En la Base de Datos se encuentra lo solicitado para la meteria Base de Datos.
 En la Carpeta Ética se encuentra lo solicitado para la meteria Ética y deontología.
+Link del video: https://drive.google.com/drive/folders/19i1BIkdJMxlvVkTSMpjWf_U1QocCUKs3?usp=sharing
 
 ## 👥 Integrantes
 
